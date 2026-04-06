@@ -1,0 +1,22 @@
+from openai import OpenAI
+
+client = OpenAI(api_key="YOUR_API_KEY")
+
+def analyze_and_calculate(user_input):
+    response = client.chat.completions.create(
+        model="gpt-5.3",
+        messages=[
+            {"role": "system", "content": "You are a smart assistant that analyzes problems and performs calculations."},
+            {"role": "user", "content": user_input}
+        ],
+        temperature=0
+    )
+    
+    return response.choices[0].message.content
+
+
+# Example usage
+query = "Analyze my expenses: I spent 200 on food, 500 on rent, 300 on shopping. What's total and biggest expense?"
+result = analyze_and_calculate(query)
+
+print(result)
